@@ -1,6 +1,7 @@
 import React from 'react';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 import styled from 'styled-components';
-import Input from '../atoms/Input';
 
 interface FormFieldProps {
   label: string;
@@ -9,29 +10,30 @@ interface FormFieldProps {
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FormFieldContainer = styled.div`
+const FormFieldContainer = styled(Box)`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 `;
 
-const Label = styled.label`
-  flex: 1;
-  margin-right: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: left;  // ラベルを左寄せにする
-`;
-
-const StyledInput = styled(Input)`
+const StyledTextField = styled(TextField)`
   flex: 2;
 `;
 
 const FormField: React.FC<FormFieldProps> = ({ label, inputType, inputValue, onInputChange }) => {
   return (
     <FormFieldContainer>
-      <Label>{label}</Label>
-      <StyledInput type={inputType} placeholder={label} value={inputValue} onChange={onInputChange} />
+      <Box component="label" flex={1} marginRight={1} textAlign="left" fontSize="16px" fontWeight="bold">
+        {label}
+      </Box>
+      <StyledTextField
+        label={label}
+        type={inputType}
+        value={inputValue}
+        onChange={onInputChange}
+        fullWidth
+        variant="outlined"
+      />
     </FormFieldContainer>
   );
 }

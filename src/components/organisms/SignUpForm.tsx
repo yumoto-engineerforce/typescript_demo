@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signUp } from '../../state/userSlice';
 import FormField from '../molecules/FormField';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import styled from 'styled-components';
-import Button from '../atoms/Button';
 
-const FormContainer = styled.div`
-  width: 400px;
+const FormContainer = styled(Box)`
+  max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   background-color: white;
@@ -24,7 +25,13 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <FormContainer>
+    <FormContainer
+      component="form"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSignUp();
+      }}
+    >
       <h2>Sign Up</h2>
       <FormField
         label="Email"
@@ -38,7 +45,9 @@ const SignUpForm: React.FC = () => {
         inputValue={password}
         onInputChange={(e) => setPassword(e.target.value)}
       />
-      <Button label="Submit" onClick={handleSignUp} />
+      <Button variant="contained" color="primary" type="submit">
+        Sign Up
+      </Button>
     </FormContainer>
   );
 };
